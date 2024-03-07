@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lora:wght@600&family=Nunito+Sans:opsz,wght@6..12,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./core/swiper/swiper.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="wrapper">
+        <!-- header start -->
+        <div class="header">
+          <div class="header__left">
+            <div class="header__left-inner">
+              <div class="content content-location">
+                <img src="./public/Frame 3.svg" alt="location" />
+                <p class="city"></p>
+                <img src="./public/arrow.svg" alt="arrow" />
+              </div>
+              <div class="content weather-state">
+                <div class="weather"></div>
+              </div>
+              <div class="content weather-icon">
+                <img class="main-icon" src="" alt="Cloud" />
+              </div>
+              <div class="content content-details">
+                <div class="temperature"></div>
+                <div class="date"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- header end -->
+
+        <!-- forecast section -->
+        <section id="forecast-dashboard">
+          <div class="main-block">
+            <div class="left-side">
+              <nav class="menu">
+                <ul class="group__list">
+                  <li class="group__list-item user">
+                    <img src="./public/user.svg" alt="" />
+                    <ul class="group__sublist no-active">
+                      <li class="group__list-item weather">
+                        <img src="./public/menu-weather-icon.svg" alt="" />
+                        <p class="weather__title">Weather</p>
+                      </li>
+                      <li class="group__list-item explore">
+                        <img src="./public/menu-explore-icon.svg" alt="" />
+                        <p class="explore__title">Explore</p>
+                      </li>
+                      <li class="group__list-item cities">
+                        <img src="./public/menu-cities-icon.svg" alt="" />
+                        <p class="cities__title">Cities</p>
+                      </li>
+                      <li class="group__list-item settings">
+                        <img src="./public/menu-settings-icon.svg" alt="" />
+                        <p>Settings</p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="middle-side forecast-hourly">
+              <div class="search">
+                <div class="search__container">
+                  <div class="search__inner">
+                    <form action="" class="search__form">
+                      <input
+                        type="text"
+                        class="search__inp"
+                        placeholder="Bishkek"
+                      />
+                      <button id="search__btn" type="submit">
+                        <i
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            id="search"
+                          >
+                            <g data-name="Layer 2">
+                              <path
+                                d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"
+                                data-name="search"
+                              ></path>
+                            </g></svg
+                        ></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="forecast-hourly__block">
+                <canvas id="myCanvas" width="884" height="300"></canvas>
+                <div class="forecast__container">
+                  <div class="forecast__content-top">
+                    <div class="forecast-title">
+                      <img src="./public/watch-icon.svg" alt="watch icon" />
+                      <span>24-hour forecast</span>
+                    </div>
+                  </div>
+                  <div class="forecast__content-main forecast-main">
+                    <!-- <ul class="forecast-main__list">
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">Now</p>
+                      </li>
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">22:00</p>
+                      </li>
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">0:00</p>
+                      </li>
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">2:00</p>
+                      </li>
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">4:00</p>
+                      </li>
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">6:00</p>
+                      </li>
+                      <li class="forecast-main__list-item">
+                        <p>25&deg;C</p>
+                        <img
+                          class="mt-5"
+                          src="./public/forecast-cloud.svg"
+                          alt=""
+                        />
+                        <p class="wind-speed">117 km/h</p>
+                        <p class="forecast-time">8:00</p>
+                      </li>
+                    </ul> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="forecast-weekly">
+              <div class="forecast-weekly__inner weekly-inner">
+                <div class="weekly-inner__wrapper">
+                  <i id="left" class="angel-left"
+                    ><img src="./public/icons8-collapse-arrow-50.png" alt=""
+                  /></i>
+                  <ul class="carousel">
+                    <li class="card" data-id="sunday">
+                      <p>Sun</p>
+                      <div class="card__icon">
+                        <img
+                          id="sunday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                    <li class="card" data-id="monday">
+                      <p>Mon</p>
+                      <div class="card__icon">
+                        <img
+                          id="monday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                    <li class="card" data-id="tuesday">
+                      <p>Tues</p>
+                      <div class="card__icon">
+                        <img
+                          id="tuesday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                    <li class="card" data-id="wednesday">
+                      <p>Wed</p>
+                      <div class="card__icon">
+                        <img
+                          id="wednesday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                    <li class="card" data-id="thursday">
+                      <p>Thu</p>
+                      <div class="card__icon">
+                        <img
+                          id="thursday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                    <li class="card" data-id="friday">
+                      <p>Fri</p>
+                      <div class="card__icon">
+                        <img
+                          id="friday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                    <li class="card" data-id="saturday">
+                      <p>Sat</p>
+                      <div class="card__icon">
+                        <img
+                          id="saturday"
+                          src="./public/cloud-slide.svg"
+                          alt=""
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                  <i id="right" class="angel-right"
+                    ><img src="./public/icons8-collapse-arrow-50.png" alt=""
+                  /></i>
+                </div>
+                <div class="time-label">
+                  <div class="time-label__icon">
+                    <img src="./public/general-clock.svg" alt="" />
+                  </div>
+                  <div class="time-label__record">8:00PM GMT</div>
+                </div>
+                <div class="weather-details">
+                  <h3 class="weather-details__title">AIR CONDITIONS</h3>
+                  <div class="weather-details__inner conditions">
+                    <div class="conditions__real-feel conditions__block">
+                      <div class="conditions__block-img">
+                        <img src="/public/realFeel.svg" alt="img" />
+                      </div>
+                      <div class="conditions__block-desc">
+                        <div class="conditions__block-title">Real Feel</div>
+                        <p class="conditions__block-temp">30&deg;C</p>
+                      </div>
+                    </div>
+                    <div class="conditions__wind conditions__block">
+                      <div class="conditions__block-img">
+                        <img src="/public/wind.svg" alt="img" />
+                      </div>
+                      <div class="conditions__block-desc">
+                        <div class="conditions__block-title">Wind</div>
+                        <p class="conditions__block-wind">0.8 km/hr</p>
+                      </div>
+                    </div>
+                    <div class="conditions__chance-of-rain conditions__block">
+                      <div class="conditions__block-img">
+                        <img src="/public/chanfeOfRain.svg" alt="img" />
+                      </div>
+                      <div class="conditions__block-desc">
+                        <div class="conditions__block-title">
+                          Chance of rain
+                        </div>
+                        <p class="conditions__block-rain">2%</p>
+                      </div>
+                    </div>
+                    <div class="conditions__uv-index conditions__block">
+                      <div class="conditions__block-img">
+                        <img src="/public/uvIndex.svg" alt="img" />
+                      </div>
+                      <div class="conditions__block-desc">
+                        <div class="conditions__block-title">UV index</div>
+                        <p class="conditions__block-temp">4</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+
+    <style>
+      #myCanvas {
+        border: 1px solid transparent;
+        color: #fff;
+      }
+    </style>
+  </body>
+</html>
